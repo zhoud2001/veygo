@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">US Phone Number</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" pattern="\\(\\d{3}\\) \\d{3} - \\d{4}" placeholder="(123) 456 - 7890" required>
+                            <input type="tel" class="form-control" id="phone" name="phone" pattern="\(\d{3}\) \d{3} - \d{4}" placeholder="(123) 456 - 7890" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
@@ -92,7 +92,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.getElementById('phone').addEventListener('input', function (e) {
-            var x = e.target.value.replace(/\\D/g, '').match(/(\\d{0,3})(\\d{0,3})(\\d{0,4})/);
+            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? ' - ' + x[3] : '');
         });
 
@@ -105,7 +105,7 @@
             }
 
             var name = document.getElementById('name').value.trim();
-            var nameParts = name.split(/\\s+/);
+            var nameParts = name.split(/\s+/);
             if (nameParts.length < 2) {
                 e.preventDefault();
                 alert('Please enter both your first and last name.');

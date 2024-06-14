@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Veygo</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.amazonaws.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -30,6 +30,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact Us</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="membership.html">Membership</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -40,7 +43,7 @@
             <h2 class="section-title">Register</h2>
             <div class="row">
                 <div class="col-md-6 mx-auto">
-                    <form>
+                    <form id="registerForm">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" required>
@@ -51,7 +54,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">US Phone Number</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" pattern="\(\d{3}\) \d{3} - \d{4}" placeholder="(123) 456 - 7890" required>
+                            <input type="tel" class="form-control" id="phone" name="phone" pattern="\\(\\d{3}\\) \\d{3} - \\d{4}" placeholder="(123) 456 - 7890" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
@@ -60,6 +63,12 @@
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                            <label class="form-check-label" for="terms">
+                                I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a> and the <a href="privacy.html" target="_blank">Privacy Policy</a>
+                            </label>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Register</button>
                         <div class="text-center mt-3">
@@ -83,8 +92,29 @@
     <script src="https://stackpath.amazonaws.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         document.getElementById('phone').addEventListener('input', function (e) {
-            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+            var x = e.target.value.replace(/\\D/g, '').match(/(\\d{0,3})(\\d{0,3})(\\d{0,4})/);
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? ' - ' + x[3] : '');
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            var dob = new Date(document.getElementById('dob').value);
+            var today = new Date();
+            if (dob >= today) {
+                e.preventDefault();
+                alert('Date of Birth must be earlier than today\'s date.');
+            }
+
+            var name = document.getElementById('name').value.trim();
+            var nameParts = name.split(/\\s+/);
+            if (nameParts.length < 2) {
+                e.preventDefault();
+                alert('Please enter both your first and last name.');
+            } else {
+                var capitalizedNames = nameParts.map(function(part) {
+                    return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase();
+                });
+                document.getElementById('name').value = capitalizedNames.join(' ');
+            }
         });
     </script>
 </body>

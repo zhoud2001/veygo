@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/styles.css">
     <!-- Tempus Dominus CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
@@ -49,18 +51,18 @@
                         <div class="form-group">
                             <label for="pickupTime">Pick Up Time</label>
                             <div class="input-group date" id="pickupTime" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input" data-target="#pickupTime" required>
+                                <input type="text" class="form-control datetimepicker-input" id="pickupTimeText" data-target="#pickupTime" onkeydown="preventKeyboardInput(event)" required readonly>
                                 <div class="input-group-append" data-target="#pickupTime" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    <div class="input-group-text"><i class="far fa-calendar"></i></div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="dropoffTime">Drop Off Time</label>
                             <div class="input-group date" id="dropoffTime" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input" data-target="#dropoffTime" required>
+                                <input type="text" class="form-control datetimepicker-input" id="dropoffTimeText" data-target="#dropoffTime" onkeydown="preventKeyboardInput(event)" required readonly>
                                 <div class="input-group-append" data-target="#dropoffTime" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    <div class="input-group-text"><i class="far fa-calendar"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -104,8 +106,7 @@
             });
             $('#dropoffTime').datetimepicker({
                 format: 'YYYY-MM-DD hh:mm A',
-                useCurrent: false,
-                minDate: moment().add(6, 'hours'), 
+                minDate: moment(), 
                 sideBySide: true,
                 icons: {
                     time: 'far fa-clock',
@@ -122,18 +123,23 @@
         });
 
         document.getElementById('pickupForm').addEventListener('submit', function (e) {
-            var pickupTime = new Date(document.getElementById('pickupTime').value);
-            var dropoffTime = new Date(document.getElementById('dropoffTime').value);
+            var pickupTime = moment(document.getElementById('pickupTimeText').value, 'YYYY-MM-DD hh:mm A').toDate();
+            var dropoffTime = moment(document.getElementById('dropoffTimeText').value, 'YYYY-MM-DD hh:mm A').toDate();
             var now = new Date();
+            var minDropoffTime = new Date(pickupTime.getTime() + 6 * 60 * 60 * 1000); // 6 hours later
 
             if (pickupTime <= now) {
                 e.preventDefault();
                 alert('Pick Up Time must be later than the current time.');
-            } else if (dropoffTime < pickupTime) {
+            } else if (dropoffTime < minDropoffTime) {
                 e.preventDefault();
                 alert('Drop Off Time must be at least 6 hours later than the Pick Up Time.');
             }
         });
+
+        function preventKeyboardInput(event) {
+            event.preventDefault();
+        }
     </script>
 </body>
 </html>

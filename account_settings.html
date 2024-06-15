@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - Veygo</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/veygo.png" alt="Veygo Logo" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="rental_date.html">Rent a Car</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="membership.html">Membership</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="account-settings" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Account Settings</h2>
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Personal Information</h5>
+                            <p class="card-text">Email: <span id="userEmail">danny.zhou@example.com</span> <button class="btn btn-link btn-sm" onclick="showEditModal('Email')"><i class="fas fa-edit"></i> Edit</button></p>
+                            <p class="card-text">Phone Number: <span id="userPhone">(123) 456-7890</span> <button class="btn btn-link btn-sm" onclick="showEditModal('Phone')"><i class="fas fa-edit"></i> Edit</button></p>
+                            <p class="card-text">Password: <span>********</span> <button class="btn btn-link btn-sm" onclick="showEditModal('Password')"><i class="fas fa-edit"></i> Edit</button></p>
+                            <h5 class="card-title mt-4">Billing Information</h5>
+                            <div id="creditCardsList">
+                                <p class="card-text">Saved Credit Cards:</p>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>**** **** **** 1234</span>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteCard('1234')">Delete</button>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>**** **** **** 5678</span>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteCard('5678')">Delete</button>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>**** ****** *1234 (Amex)</span>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteCard('Amex1234')">Delete</button>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="showAddCardModal()">Add Card</button>
+                            <p class="card-text mt-4">Billing Address: <span id="userAddress">123 Main St, Anytown, USA</span> <button class="btn btn-link btn-sm" onclick="showEditModal('Address')"><i class="fas fa-edit"></i> Edit</button></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OTP Modal -->
+    <div class="modal fade" id="otpModal" tabindex="-1" role="dialog" aria-labelledby="otpModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="otpModalLabel">OTP Verification</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>An OTP has been sent to your saved phone number. Please enter the OTP to proceed.</p>
+                    <form id="otpForm">
+                        <div class="form-group">
+                            <label for="otpInput">OTP</label>
+                            <input type="text" class="form-control" id="otpInput" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Verify</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Card Modal -->
+    <div class="modal fade" id="addCardModal" tabindex="-1" role="dialog" aria-labelledby="addCardModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCardModalLabel">Add New Credit Card</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addCardForm">
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" class="form-control" id="cardNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expiryDate">Expiry Date</label>
+                            <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" class="form-control" id="cvv" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Card</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-primary text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0">&copy; 2024 Veygo. All rights reserved.</p>
+            <p><a href="terms.html" class="text-white">Terms and Conditions</a> | <a href="privacy.html" class="text-white">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        function showEditModal(field) {
+            $('#otpModal').modal('show');
+        }
+
+        function deleteCard(cardSuffix) {
+            alert('Deleted card ending in ' + cardSuffix);
+            // Implement actual delete logic here
+        }
+
+        function showAddCardModal() {
+            $('#addCardModal').modal('show');
+        }
+
+        document.getElementById('otpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('OTP Verified. You can now edit your details.');
+            $('#otpModal').modal('hide');
+        });
+
+        document.getElementById('addCardForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Card added successfully.');
+            $('#addCardModal').modal('hide');
+            // Implement actual add card logic here
+        });
+    </script>
+</body>
+</html>

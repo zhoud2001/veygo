@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" />
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        #rental-date {
+            margin-bottom: 3in;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
@@ -49,7 +54,7 @@
                 <div class="form-group">
                     <label for="pickupTime">Pick Up Date & Time</label>
                     <div class="input-group date" id="pickupTime" data-target-input="nearest">
-                        <input type="text" id="pickupTimeText" class="form-control datetimepicker-input" data-target="#pickupTime" placeholder="2022-12-22 09:00 AM" onkeydown="preventKeyboardInput(event)" />
+                        <input type="text" id="pickupTimeText" class="form-control datetimepicker-input" data-target="#pickupTime" placeholder="2022-12-22 09:00 AM" onkeydown="preventKeyboardInput(event)" inputmode="none" />
                         <div class="input-group-append" data-target="#pickupTime" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="far fa-clock"></i></div>
                         </div>
@@ -58,7 +63,7 @@
                 <div class="form-group">
                     <label for="dropoffTime">Drop Off Date & Time</label>
                     <div class="input-group date" id="dropoffTime" data-target-input="nearest">
-                        <input type="text" id="dropoffTimeText" class="form-control datetimepicker-input" data-target="#dropoffTime" placeholder="2022-12-22 06:00 PM" onkeydown="preventKeyboardInput(event)" />
+                        <input type="text" id="dropoffTimeText" class="form-control datetimepicker-input" data-target="#dropoffTime" placeholder="2022-12-22 06:00 PM" onkeydown="preventKeyboardInput(event)" inputmode="none" />
                         <div class="input-group-append" data-target="#dropoffTime" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="far fa-clock"></i></div>
                         </div>
@@ -129,6 +134,8 @@
             } else if (dropoffTime < minDropoffTime) {
                 e.preventDefault();
                 alert('Drop Off Time must be at least 6 hours later than the Pick Up Time.');
+            } else {
+                window.location.href = 'rsvp_availability.html';
             }
         });
 

@@ -50,27 +50,31 @@
     <section id="rental-date" class="py-5 body">
         <div class="container">
             <h2 class="section-title">Pick Up & Drop Off</h2>
-            <form id="pickupForm" action="rsvp_availability.html">
-                <div class="form-group">
-                    <label for="pickupTime">Pick Up Date & Time</label>
-                    <div class="input-group date" id="pickupTime" data-target-input="nearest">
-                        <input type="text" id="pickupTimeText" class="form-control datetimepicker-input" data-target="#pickupTime" placeholder="2022-12-22 09:00 AM" onkeydown="preventKeyboardInput(event)" inputmode="none" />
-                        <div class="input-group-append" data-target="#pickupTime" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="far fa-clock"></i></div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8 col-sm-12">
+                    <form id="pickupForm" action="rsvp_availability.html">
+                        <div class="form-group">
+                            <label for="pickupTime">Pick Up Date & Time</label>
+                            <div class="input-group date" id="pickupTime" data-target-input="nearest">
+                                <input type="text" id="pickupTimeText" class="form-control datetimepicker-input" data-target="#pickupTime" placeholder="2022-12-22 09:00 AM" onkeydown="preventKeyboardInput(event)" inputmode="none" />
+                                <div class="input-group-append" data-target="#pickupTime" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="dropoffTime">Drop Off Date & Time</label>
-                    <div class="input-group date" id="dropoffTime" data-target-input="nearest">
-                        <input type="text" id="dropoffTimeText" class="form-control datetimepicker-input" data-target="#dropoffTime" placeholder="2022-12-22 06:00 PM" onkeydown="preventKeyboardInput(event)" inputmode="none" />
-                        <div class="input-group-append" data-target="#dropoffTime" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="far fa-clock"></i></div>
+                        <div class="form-group">
+                            <label for="dropoffTime">Drop Off Date & Time</label>
+                            <div class="input-group date" id="dropoffTime" data-target-input="nearest">
+                                <input type="text" id="dropoffTimeText" class="form-control datetimepicker-input" data-target="#dropoffTime" placeholder="2022-12-22 06:00 PM" onkeydown="preventKeyboardInput(event)" inputmode="none" />
+                                <div class="input-group-append" data-target="#dropoffTime" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary">Check Availability</button>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-primary">Check Availability</button>
-            </form>
+            </div>
         </div>
     </section>
 
@@ -134,8 +138,6 @@
             } else if (dropoffTime < minDropoffTime) {
                 e.preventDefault();
                 alert('Drop Off Time must be at least 6 hours later than the Pick Up Time.');
-            } else {
-                window.location.href = 'rsvp_availability.html';
             }
         });
 

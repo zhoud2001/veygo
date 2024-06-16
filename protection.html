@@ -13,18 +13,25 @@
             text-align: center;
             padding: 15px;
             border: 2px solid transparent;
+            background-color: #e9ecef; /* Light grey background */
             transition: border-color 0.2s, background-color 0.2s;
         }
 
         .btn-plan:hover {
-            border-color: #ccc;
-            background-color: #f8f9fa;
+            border-color: #007bff; /* Bootstrap's primary color */
+            background-color: #f8f9fa; /* Light grey background on hover */
         }
 
         .btn-plan.selected {
             background-color: #17a2b8; /* Bootstrap's teal color */
             color: white;
             border-color: #17a2b8;
+        }
+
+        .btn-plan.selected.decline {
+            background-color: #dc3545; /* Bootstrap's danger color */
+            color: white;
+            border-color: #dc3545;
         }
     </style>
 </head>
@@ -67,10 +74,10 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h5 class="card-title">Liability Insurance Supplement</h5>
-                                <p class="card-text">Provides additional liability insurance protection.</p>
-                                <button type="button" class="btn btn-plan" id="lis" onclick="selectPlan('lis')">Select</button>
-                                <input class="form-check-input" type="radio" name="protectionPlan" id="lis-radio" value="lis" style="display:none;">
+                                <h5 class="card-title">Both LIS and CDW</h5>
+                                <p class="card-text">Get comprehensive coverage with both liability and collision protection.</p>
+                                <button type="button" class="btn btn-plan" id="both" onclick="selectPlan('both')">Select</button>
+                                <input class="form-check-input" type="radio" name="protectionPlan" id="both-radio" value="both" style="display:none;">
                             </div>
                         </div>
                     </div>
@@ -87,10 +94,10 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h5 class="card-title">Both LIS and CDW</h5>
-                                <p class="card-text">Get comprehensive coverage with both liability and collision protection.</p>
-                                <button type="button" class="btn btn-plan" id="both" onclick="selectPlan('both')">Select</button>
-                                <input class="form-check-input" type="radio" name="protectionPlan" id="both-radio" value="both" style="display:none;">
+                                <h5 class="card-title">Liability Insurance Supplement</h5>
+                                <p class="card-text">Provides additional liability insurance protection.</p>
+                                <button type="button" class="btn btn-plan" id="lis" onclick="selectPlan('lis')">Select</button>
+                                <input class="form-check-input" type="radio" name="protectionPlan" id="lis-radio" value="lis" style="display:none;">
                             </div>
                         </div>
                     </div>
@@ -125,6 +132,11 @@
             if (!document.getElementById(planId).classList.contains('selected')) {
                 document.querySelectorAll('.btn-plan').forEach(btn => btn.classList.remove('selected'));
                 document.getElementById(planId).classList.add('selected');
+                if (planId === 'decline') {
+                    document.getElementById(planId).classList.add('decline');
+                } else {
+                    document.getElementById('decline').classList.remove('decline');
+                }
                 document.getElementById(planId + '-radio').checked = true;
             }
         }

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protection Plan - Veygo</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .btn-plan {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            border: 2px solid transparent;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .btn-plan:hover {
+            border-color: #ccc;
+            background-color: #f8f9fa;
+        }
+
+        .btn-plan.selected {
+            background-color: #17a2b8; /* Bootstrap's teal color */
+            color: white;
+            border-color: #17a2b8;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/veygo.png" alt="Veygo Logo" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="rental_date.html">Rent a Car</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="membership.html">Membership</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="protection-plan" class="py-5 body">
+        <div class="container">
+            <h2 class="section-title">Select Your Protection Plan</h2>
+            <form>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Liability Insurance Supplement</h5>
+                                <p class="card-text">Provides additional liability insurance protection.</p>
+                                <button type="button" class="btn btn-plan" id="lis" onclick="selectPlan('lis')">Select</button>
+                                <input class="form-check-input" type="radio" name="protectionPlan" id="lis-radio" value="lis" style="display:none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Collision Damage Protection</h5>
+                                <p class="card-text">Covers damage to the rental vehicle in case of an accident.</p>
+                                <button type="button" class="btn btn-plan" id="cdw" onclick="selectPlan('cdw')">Select</button>
+                                <input class="form-check-input" type="radio" name="protectionPlan" id="cdw-radio" value="cdw" style="display:none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Both LIS and CDW</h5>
+                                <p class="card-text">Get comprehensive coverage with both liability and collision protection.</p>
+                                <button type="button" class="btn btn-plan" id="both" onclick="selectPlan('both')">Select</button>
+                                <input class="form-check-input" type="radio" name="protectionPlan" id="both-radio" value="both" style="display:none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Decline any coverage</h5>
+                                <p class="card-text">You can decline any additional coverage and rely on your personal insurance.</p>
+                                <button type="button" class="btn btn-plan" id="decline" onclick="confirmDecline()">Select</button>
+                                <input class="form-check-input" type="radio" name="protectionPlan" id="decline-radio" value="decline" style="display:none;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Continue</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer fixed-bottom bg-primary text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0">&copy; 2024 Veygo. All rights reserved.</p>
+            <p><a href="terms.html" class="text-white">Terms and Conditions</a> | <a href="privacy.html" class="text-white">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function selectPlan(planId) {
+            if (!document.getElementById(planId).classList.contains('selected')) {
+                document.querySelectorAll('.btn-plan').forEach(btn => btn.classList.remove('selected'));
+                document.getElementById(planId).classList.add('selected');
+                document.getElementById(planId + '-radio').checked = true;
+            }
+        }
+
+        function confirmDecline() {
+            if (confirm('Are you sure you want to decline coverage? This may expose you to significant financial risk in case of an accident.')) {
+                selectPlan('decline');
+            }
+        }
+    </script>
+</body>
+</html>

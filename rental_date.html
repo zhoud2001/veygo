@@ -7,7 +7,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <!-- Tempus Dominus CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" />
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -42,34 +42,30 @@
         </div>
     </nav>
 
-    <section id="pickup" class="py-5 body">
+    <section id="rental-date" class="py-5 body">
         <div class="container">
             <h2 class="section-title">Pick Up & Drop Off</h2>
-            <div class="row">
-                <div class="col-md-6 mx-auto">
-                    <form id="pickupForm">
-                        <div class="form-group">
-                            <label for="pickupTime">Pick Up Time</label>
-                            <div class="input-group date" id="pickupTime" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input" id="pickupTimeText" data-target="#pickupTime" onkeydown="preventKeyboardInput(event)" inputmode='none' required readonly>
-                                <div class="input-group-append" data-target="#pickupTime" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="far fa-calendar"></i></div>
-                                </div>
-                            </div>
+            <form id="pickupForm" action="rsvp_availability.html">
+                <div class="form-group">
+                    <label for="pickupTime">Pick Up Date & Time</label>
+                    <div class="input-group date" id="pickupTime" data-target-input="nearest">
+                        <input type="text" id="pickupTimeText" class="form-control datetimepicker-input" data-target="#pickupTime" placeholder="2022-12-22 09:00 AM" onkeydown="preventKeyboardInput(event)" />
+                        <div class="input-group-append" data-target="#pickupTime" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="far fa-clock"></i></div>
                         </div>
-                        <div class="form-group">
-                            <label for="dropoffTime">Drop Off Time</label>
-                            <div class="input-group date" id="dropoffTime" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input" id="dropoffTimeText" data-target="#dropoffTime" onkeydown="preventKeyboardInput(event)" inputmode='none' required readonly>
-                                <div class="input-group-append" data-target="#dropoffTime" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="far fa-calendar"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                    </form>
+                    </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="dropoffTime">Drop Off Date & Time</label>
+                    <div class="input-group date" id="dropoffTime" data-target-input="nearest">
+                        <input type="text" id="dropoffTimeText" class="form-control datetimepicker-input" data-target="#dropoffTime" placeholder="2022-12-22 06:00 PM" onkeydown="preventKeyboardInput(event)" />
+                        <div class="input-group-append" data-target="#dropoffTime" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="far fa-clock"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Check Availability</button>
+            </form>
         </div>
     </section>
 
@@ -83,9 +79,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <!-- Tempus Dominus JS -->
-    <script src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
     <script>
         $(function () {
             $('#pickupTime').datetimepicker({
